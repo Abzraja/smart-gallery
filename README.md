@@ -40,10 +40,6 @@ I developed (maybe I get to say I'm a dev) this application before I earned the 
 
 ## Technologies Used
 
-
-- **Cloud Services**: AWS S3 for storage, AWS Lambda for backend logic, AWS Amplify/EC2 for deployment
-- **Scripting**: Bash for automating environment setup
-
 - **Frontend**: React, JavaScript, HTML5, CSS3
 - **Frontend & Backend Management**: AWS Amplify
 - **Authentication**: AWS Cognito
