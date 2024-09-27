@@ -1,0 +1,53 @@
+.tag-filter {
+    margin-bottom: 20px;
+  }
+  
+  .tag-button {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .tag-button.selected {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .photos {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .photo-item {
+    margin: 10px;
+    cursor: pointer;
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 90%;
+    max-height: 90%;
+  }
+  
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+  }

@@ -1,0 +1,14 @@
+{
+  "resourceName": "smartgallerybucket",
+  "policyUUID": "df7d433a",
+  "bucketName": "smartgallerybucket",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "S3Trigger28663e0d",
+  "groupAccess": {}
+}
