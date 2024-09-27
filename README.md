@@ -1,6 +1,8 @@
 # Image Gallery React App
 A responsive web application that allows users to browse, upload, and organize images. Built with React and AWS Amplify, this project demonstrates a cloud-integrated, full-stack approach to web development.
 
+Use the app here: https://main.d136ak8vn4abcb.amplifyapp.com/
+
 ## Disclaimer
 I'm not a dev. I have no professional coding experience, but I can code. This README is probably not in the format expected. My focus is to demonstrate my ability to quickly learn and utilize cloud services, and ability to navigate and solve problems I encounter along the way. 
 I set a high expectation for myself and gave myself a problem in order to see what I could achieve if I tried. While searching for a Cloud project to implement, I came across the suggestion of an image gallery, then thought wouldn't it be cool if the images can be analysed by AI and the labels be used as a filtering mechanism.
