@@ -3,11 +3,17 @@ A responsive web application that allows users to browse, upload, and organize i
 
 Use the app here: https://main.d136ak8vn4abcb.amplifyapp.com/
 
-## Disclaimer
-I'm not a dev. I have no professional coding experience, but I can code. This README is probably not in the format expected. My focus is to demonstrate my ability to quickly learn and utilize cloud services, and ability to navigate and solve problems I encounter along the way. 
-I set a high expectation for myself and gave myself a problem in order to see what I could achieve if I tried. While searching for a Cloud project to implement, I came across the suggestion of an image gallery, then thought wouldn't it be cool if the images can be analysed by AI and the labels be used as a filtering mechanism.
+## Architecture Diagram
+![diagram](README-images/diagram.png)
 
-Getting the application to a basic operational state, took me 2 weekends.
+## Disclaimer
+I don't have professional coding experience, but I can code from gaining coding skills from a bootcamp. For me it's not the code itself that is my focus. The part I love is problem solving; being able to break down a problem into smaller steps then approach it logically step by step. AI, code repositories,and sites like stack overflow can be leveraged for the code. 
+
+I want to demonstrate my ability to quickly learn and utilize cloud services, and ability to navigate and solve problems I encounter along the way.
+
+I set a high expectation for myself and gave myself a problem - a Cloud project - in order to see how far my problem solving ability could take me. I came across the suggestion of an image gallery, then thought wouldn't it be cool if the images can be analysed by AI and the labels be used as a filtering mechanism to filter the displayed images.
+
+Getting the application to a basic operational state, took me 4 days (2 weekends).
 
 This project was my first time ever using:
 - React
@@ -20,7 +26,7 @@ This project was my first time ever using:
 - Lambda (outside of labs)
 
 
-I developed (maybe I get to say I'm a dev) this application before I earned the Solutions Architect Associate certification, so it would be good to revisit this with the lens of best practices under the well architected framework.
+I developed (maybe I get to say I'm a dev) this application before I earned the Solutions Architect Associate certification, so it would be good to revisit this with the lens of best practices under the AWS well architected framework.
 
 ## Usage
 
@@ -84,6 +90,7 @@ The application utilizes AWS services to provide a seamless, serverless experien
 
 ## CI/CD and Automated Deployment Strategy
 
+- Changes to the github repo are automatically deployed using Amplify.
 - **AWS Amplify** provides CI/CD capabilities, automatically deploying changes from the GitHub repository.
 - Integrated pipelines manage build, deployment, and testing, ensuring smooth and error-free updates.
 - Supports multiple environments for testing and production, minimizing downtime and deployment risks.
@@ -97,10 +104,10 @@ The application utilizes AWS services to provide a seamless, serverless experien
 
 ### Issues Experienced
 
-Huge undertaking. Almost everything used is new to the me and I only have limited experience of writing JavaScript code.
+The project was a huge undertaking. Almost everything used is new to the me and I only have limited experience of writing JavaScript code.
 
 * React - Had to figure out how to install it and get to know it's structure.
-* React app didn't respond in real time to changes in the code - Originally had the project set up in the Windows file system. Had to deploy in the Ubuntu file system and not Windows, then it started working correctly.
+* React app didn't respond in real time to changes in the code because I had the project set up in the Windows file system. Once set up in the Ubuntu file system, it started working correctly.
 * Amplify - Had to learn how to use it - referred to documentation and videos.
 * Amplify react library - needed to find out which library I needed to install to integrate with with React.
 * How to setup user login and authentication using AWS Cognito.
@@ -110,8 +117,7 @@ Huge undertaking. Almost everything used is new to the me and I only have limite
 * Script for fetching photos from private folder
 * Lambda Function not fetching tags from Rekognition, then not storing tags in database. Implemented error logging in the code and analyzed cloudwatch logs for the lambda function. Had to give function Read Access for Rekognition and Full Access for DynamoDB.
 * Script for fetchings tags from API. - ended up trying to query wrong table as I thought the Table I had referenced in the Schema was the Dynamo DB table I had set up through Amplify. GraphQL actually creates its own DynamoDB table.
-* And more... - leveraged ChatGPT/CoPilot a lot. ChatGPT kept giving code based on the older version of Amplify which did not work.
-* Spent about 35 hours building and getting the app to it's current state. Over 40 hours when consider additonal things like the presentation and documentation.
+* Leveraged ChatGPT/CoPilot a lot. ChatGPT kept giving code based on the older version of Amplify which did not work. So I referenced the Amplify documentation and when I found what I needed, I input that to ChatGPT so it could give the correct code.
 
 
 
@@ -149,4 +155,4 @@ Contributions are welcome! Please fork the repository and create a pull request 
 
 
 ## Contact
-Created by [Your Name](https://www.linkedin.com/in/abz-raja) - feel free to reach out!
+Created by [Abdurrahman Raja (Abz)](https://www.linkedin.com/in/abz-raja) - feel free to reach out!
