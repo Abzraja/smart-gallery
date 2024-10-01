@@ -3,11 +3,23 @@ A responsive web application that allows users to browse, upload, and organize i
 
 Use the app here: https://main.d136ak8vn4abcb.amplifyapp.com/
 
+## Changelog
+
+### 10 OCT 2024
+Updated the look of the app by implementing Material UI so it looks more professional.
+- Implemented Material UI React Libary (https://mui.com/)
+- Added React-Helmet library and set up the responsive meta tag
+- Set the up CSS baseline component from MUI
+- Used MUI Button component to change style of buttons
+- Deleted unused CSS files
+
+
+
 ## Architecture Diagram
 ![diagram](README-images/diagram.png)
 
 ## Disclaimer
-I don't have professional coding experience, but I can code from gaining coding skills from a bootcamp. For me it's not the code itself that is my focus. The part I love is problem solving; being able to break down a problem into smaller steps then approach it logically step by step. AI, code repositories,and sites like stack overflow can be leveraged for the code. 
+I don't have professional coding experience but I can code thanks to gaining coding skills from a bootcamp. For me it's not the code itself that is my focus. The part I love is problem solving; being able to break down a problem into smaller steps then approach it logically step by step. AI, code repositories,and sites like stack overflow can be leveraged for the code. 
 
 I want to demonstrate my ability to quickly learn and utilize cloud services, and ability to navigate and solve problems I encounter along the way.
 
@@ -136,11 +148,11 @@ The project was a huge undertaking. Almost everything used is new to the me and 
   &nbsp;
 
 3. **Workflow Order Adjustment:**
-   - Currently the lambda function triggered when a photo is uploaded. This might be an unoptimized order/sequence. At the moment the tags/labels for a given image will not appear in the gallery unless they are present in DynamoDB. Sometimes Rekognition takes longer than expected to return the labels. I think the current solution is fine, as it does not prevent the app from being used while the image is still being analyzed. The user may wonder why the tags did not appear and attempt to upload the image again. This is something I need to think about.
+   - The lambda function triggered when a photo is uploaded. This might be an unoptimized order/sequence. At the moment the tags/labels for a given image will not appear in the gallery unless they are present in DynamoDB. Sometimes Rekognition takes longer than expected to return the labels. I think the current solution is fine, as it does not prevent the app from being used while the image is still being analyzed. The user may wonder why the tags did not appear and attempt to upload the image again. This is something I need to think about.
   &nbsp;
 
 4. **Enhancing Photo Sharing:**
-   - Currently, photos are uploaded to a private-level folder in S3, limiting access to the logged-in user.
+   - Photos are uploaded to a private-level folder in S3, limiting access to the logged-in user.
    - To enable photo sharing, I can introduce different folders in S3 with varying access levels. Some folders could allow any logged-in user to view photos, facilitating a photo-sharing feature.
   &nbsp;
 

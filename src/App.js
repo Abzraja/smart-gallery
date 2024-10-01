@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import UploadPhoto from './UploadPhoto';
@@ -9,18 +12,19 @@ const App = ({ signOut, user }) => {
   const [view, setView] = useState('gallery');
   console.log(user)
   return (
+    <Box sx={{ m: '10px', p: '0px' }}>
     <div>
-      <button onClick={signOut} style={{ float: 'right' }}>
+      <Button variant="contained" onClick={signOut} style={{ float: 'right' }}>
         Sign out
-      </button>
+      </Button>
       <div>
-        <button onClick={() => setView('gallery')}>View Gallery</button>
-        <button onClick={() => setView('upload')} style={{ marginLeft: '10px' }}>
-          Upload Photo
-        </button>
-        <button onClick={() => setView('delete')} style={{ marginLeft: '10px' }}>
-          Delete Photos
-        </button>
+        <Button onClick={() => setView('gallery')}>View Gallery</Button>
+        <Button onClick={() => setView('upload')} style={{}}>
+          Upload Image
+        </Button>
+        <Button startIcon={<DeleteIcon />} onClick={() => setView('delete')} style={{}}>
+          Delete Image
+        </Button> 
       </div>
       <div>
       <h1>Hello, {user.signInDetails.loginId}</h1>
@@ -30,6 +34,7 @@ const App = ({ signOut, user }) => {
       {view === 'upload' && <UploadPhoto />}
       {view === 'delete' && <DeletePhotos />}
     </div>
+    </Box>
   );
 };
 

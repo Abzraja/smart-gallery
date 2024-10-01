@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Button from '@mui/material/Button';
 import { list, getUrl } from '@aws-amplify/storage';
 import { fetchAuthSession } from '@aws-amplify/auth';
 import { generateClient } from 'aws-amplify/api';
@@ -103,13 +104,13 @@ function PhotoGallery() {
     <div className="photo-gallery">
       <div className="tag-filter">
         {tags.map(tag => (
-          <button
+          <Button sx={{ m: 0.5 }} variant="contained"
             key={tag}
             className={`tag-button ${selectedTags.includes(tag) ? 'selected' : ''}`}
             onClick={() => handleTagSelection(tag)}
           >
             {tag}
-          </button>
+          </Button>
         ))}
       </div>
 
