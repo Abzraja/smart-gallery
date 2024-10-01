@@ -19,16 +19,14 @@ const App = ({ signOut, user }) => {
       </Button>
       <div>
         <Button onClick={() => setView('gallery')}>View Gallery</Button>
-        <Button onClick={() => setView('upload')} style={{}}>
-          Upload Image
-        </Button>
-        <Button startIcon={<DeleteIcon />} onClick={() => setView('delete')} style={{}}>
-          Delete Image
-        </Button> 
+        <Button onClick={() => setView('upload')} style={{}}> Upload Image</Button>
+        <Button sx={{m:'5px'}} startIcon={<DeleteIcon />} onClick={() => setView('delete')}>Delete Image</Button> 
       </div>
       <div>
       <h1>Hello, {user.signInDetails.loginId}</h1>
+      <div style={{ marginBottom: '20px' }}>
       UserID: {user.username}
+      </div>
       </div>
       {view === 'gallery' && <PhotoGallery />}
       {view === 'upload' && <UploadPhoto />}

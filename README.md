@@ -12,7 +12,10 @@ Updated the look of the app by implementing Material UI so it looks more profess
 - Set the up CSS baseline component from MUI
 - Used MUI Button component to change style of buttons
 - Deleted unused CSS files
-
+- Created a preview of selected file when uploading an image
+- Added some icons
+- Added a button to delete the image which appears when you hover over an image
+- fixed the image size when an image is enlarged so that it doesnt exceed the view
 
 
 ## Architecture Diagram

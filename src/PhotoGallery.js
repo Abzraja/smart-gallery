@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { list, getUrl } from '@aws-amplify/storage';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { list, getUrl, remove } from '@aws-amplify/storage';
 import { fetchAuthSession } from '@aws-amplify/auth';
 import { generateClient } from 'aws-amplify/api';
 import { listPhotoTags } from './graphql/queries';
@@ -18,6 +19,7 @@ function PhotoGallery() {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [tags, setTags] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
+  const [deleteConfirm, setDeleteConfirm] = useState(null);
 
   useEffect(() => {
     const fetchPhotos = async () => {
@@ -99,6 +101,23 @@ function PhotoGallery() {
     setSelectedTags(prevTags => prevTags.includes(tag) ? prevTags.filter(t => t !== tag) : [...prevTags, tag]);
   };
 
+
+  const handleDeleteClick = (photo) => {
+    setDeleteConfirm(photo);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (deleteConfirm) {
+      try {
+        await remove({ path: deleteConfirm.path });
+        setPhotos(photos.filter(p => p.path !== deleteConfirm.path));
+        setDeleteConfirm(null);
+      } catch (error) {
+        console.error('Error deleting photo:', error);
+      }
+    }
+  };
+
   const filteredPhotos = photos.filter(photo => selectedTags.every(tag => photo.tags.includes(tag)));
 
   return (
@@ -118,8 +137,17 @@ function PhotoGallery() {
 
       <div className="photos">
         {filteredPhotos.map((photo, index) => (
-          <div key={index} className="photo-item" onClick={() => openPreview(photo)}>
-            <img src={photo.url} alt="Uploaded" />
+          <div key={index} className="photo-item" >
+            <img src={photo.url} alt="Uploaded" onClick={() => openPreview(photo)} />
+            <IconButton className="delete-icon" onClick={() => handleDeleteClick(photo)} aria-label="delete"
+        size="small">
+            <DeleteIcon fontSize="small"/>
+            </IconButton>
+            {deleteConfirm && deleteConfirm.path === photo.path && (
+              <Button variant="contained" color="primary" onClick={handleDeleteConfirm}>
+                Confirm Delete
+              </Button>
+            )}
           </div>
         ))}
       </div>

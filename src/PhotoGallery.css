@@ -1,9 +1,8 @@
 .tag-filter {
     margin-bottom: 20px;
-    margin-top:20px;
   }
   
-  .tag-button {
+  /* .tag-button {
     margin: 5px;
     padding: 10px;
     border: none;
@@ -13,7 +12,7 @@
   .tag-button.selected {
     background-color: #007bff;
     color: white;
-  }
+  } */
   
   .photos {
     display: flex;
@@ -21,34 +20,85 @@
   }
   
   .photo-item {
-    margin: 10px;
     cursor: pointer;
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+  }
+
+  .photo-item img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
   
+  .delete-icon {
+    position: absolute !important;
+    top: -8px;
+    right: 2px;
+    z-index: 10; /* Ensure it appears above the image */
+    color: rgb(255, 255, 255);
+    background-color: rgba(128, 127, 127, 0.7) !important;
+    border-radius: 5%;
+    display: none !important;
+    width: 32px; /* Control the width to make it more square */
+    height: 32px; /* Control the height to match the width */
+  }
+
+  .delete-icon .MuiSvgIcon-root {
+    color: rgb(255, 255, 255) !important; /* Change the color of the delete icon */
+    font-size: 20px !important; /* Adjust the icon size if needed */
+  }
+
+  .photo-item:hover .delete-icon {
+    display: block !important;
+  }
+
+  .photo-item button {
+    display: block;
+    margin-top: 10px;
+    width: auto;
+    max-width: 200px;
+  }
+
   .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it stays on top */
+  }
+  
+  .modal-content {
+    position: relative; /* Make modal content the reference for absolute positioning */
+    background-color: #fff;
+    padding: 0px;
+    border-radius: 10px;
+    max-width: 90%; /* Make sure modal content doesn't exceed viewport width */
+    max-height: 90%; /* Make sure modal content doesn't exceed viewport height */
+    overflow: hidden; /* Hide any overflowing content */
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  
-  .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 90%;
-    max-height: 90%;
+
+  .modal-content img {
+    max-width: 100%; /* Ensure image scales down to fit modal */
+    max-height: 100%; /* Ensure image scales down to fit modal */
+    width: auto; /* Maintain aspect ratio */
+    height: auto; /* Maintain aspect ratio */
   }
   
   .close {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    color:#0c0c0c, 0.9;
+    top: -10px;
+    right: 8px;
+    font-size: 40px;
     cursor: pointer;
-    font-size: 24px;
   }

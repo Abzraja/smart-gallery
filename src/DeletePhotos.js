@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Button from '@mui/material/Button';
 import { list, remove, getUrl } from '@aws-amplify/storage';
 import { fetchAuthSession } from 'aws-amplify/auth';
 import './DeletePhotos.css'; // Make sure to create DeletePhotos.css for styling
@@ -86,9 +87,9 @@ function DeletePhotos() {
       {selectedPhoto && (
         <div className="selected-photo">
           <img src={selectedPhoto.url} alt="Selected" />
-          <button onClick={handleDeletePhoto} disabled={deleteStatus.deleting}>
+          <Button variant="contained" onClick={handleDeletePhoto} disabled={deleteStatus.deleting}>
             Delete
-          </button>
+          </Button>
         </div>
       )}
     </div>
