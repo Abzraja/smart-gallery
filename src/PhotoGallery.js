@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { list, getUrl } from '@aws-amplify/storage';
 import { fetchAuthSession } from '@aws-amplify/auth';
@@ -101,6 +102,7 @@ function PhotoGallery() {
   const filteredPhotos = photos.filter(photo => selectedTags.every(tag => photo.tags.includes(tag)));
 
   return (
+    
     <div className="photo-gallery">
       <div className="tag-filter">
         {tags.map(tag => (
@@ -131,6 +133,7 @@ function PhotoGallery() {
         </div>
       )}
     </div>
+  
   );
 }
 

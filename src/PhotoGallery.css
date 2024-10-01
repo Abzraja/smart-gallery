@@ -1,6 +1,9 @@
 .tag-filter {
     margin-bottom: 20px;
     margin-top:20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   
   .tag-button {
@@ -18,6 +21,7 @@
   .photos {
     display: flex;
     flex-wrap: wrap;
+  justify-content: center;
   }
   
   .photo-item {
