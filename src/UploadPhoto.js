@@ -49,16 +49,18 @@ reader.readAsDataURL(e.target.files[0]);
     <div>
       <input type="file" id="file-input" onChange={handleFileChange} style={{ display: 'none' }} />
       <label htmlFor="file-input">
-        <Button sx={{ m: 1, }} variant="contained" component="span" >
-          Choose File
+        <Button sx={{ m: 1, }} variant="contained" component="span" tabIndex={-1} startIcon={<CloudUploadIcon />} >
+          UPLOAD IMAGE
         </Button>
       </label>
       {preview && (
         <Box sx={{ mt: 2, width: '50%', height: 'auto' }}>
           <img src={preview} alt="Preview" style={{ maxWidth: '100%', height: 'auto' }} />
+          <Button sx={{ m: 1 }} variant="contained" role={undefined}  onClick={handleUpload}>Submit</Button>
         </Box>
+        
       )}
-      <Button sx={{ m: 1 }} variant="contained" role={undefined} tabIndex={-1} startIcon={<CloudUploadIcon />} onClick={handleUpload}>Upload Photo</Button>
+      
     </div>
   );
 };

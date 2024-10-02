@@ -118,16 +118,23 @@ function PhotoGallery() {
     }
   };
 
-  const filteredPhotos = photos.filter(photo => selectedTags.every(tag => photo.tags.includes(tag)));
+  // const filteredPhotos = photos.filter(photo => selectedTags.every(tag => photo.tags.includes(tag)));
+  const filteredPhotos = selectedTags.length > 0 
+  ? photos.filter(photo => selectedTags.some(tag => photo.tags.includes(tag)))
+  : photos;
 
   return (
     
     <div className="photo-gallery">
       <div className="tag-filter">
         {tags.map(tag => (
-          <Button sx={{ m: 0.5 }} variant="contained"
+          <Button sx={{ m: 0.5,
+            boxShadow: selectedTags.includes(tag) ? 6 : 1,  // Elevation levels (6 for selected, 1 for default)
+           }} 
+           variant="contained"
             key={tag}
-            className={`tag-button ${selectedTags.includes(tag) ? 'selected' : ''}`}
+            // className={`tag-button ${selectedTags.includes(tag) ? 'selected' : ''}`}
+            color={selectedTags.includes(tag) ? "secondary" : "primary"}  // Changes color based on selection
             onClick={() => handleTagSelection(tag)}
           >
             {tag}

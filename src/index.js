@@ -21,6 +21,7 @@ root.render(
   <React.StrictMode>
     <Helmet>
       <meta name="viewport" content="initial-scale=1, width=device-width" />
+      <title>Smart Image Gallery</title>
     </Helmet>
     <CssBaseline enableColorScheme />
     <App />

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -23,9 +24,11 @@ const App = ({ signOut, user }) => {
         <Button sx={{m:'5px'}} startIcon={<DeleteIcon />} onClick={() => setView('delete')}>Delete Image</Button> 
       </div>
       <div>
+      <Typography sx={{ fontSize: { xs: '0.5rem', sm: '0.75rem', md: '1rem' } }}>
       <h1>Hello, {user.signInDetails.loginId}</h1>
-      <div style={{ marginBottom: '20px' }}>
-      UserID: {user.username}
+      </Typography>
+      <div style={{ marginBottom: '30px' }}>
+      {/* UserID: {user.username} */}
       </div>
       </div>
       {view === 'gallery' && <PhotoGallery />}
