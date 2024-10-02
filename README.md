@@ -7,13 +7,13 @@ Use the app here: https://main.d136ak8vn4abcb.amplifyapp.com/
 
 ## Changelog
 
-### 11 OCT 2024
+### 02 OCT 2024
 - Changed displayed photos filtering logic from AND to OR. - Previously images only displayed if they were relevant to ALL selected tags. Now all images will display as long as 1 relevant tag is selected.
 - Made the selected tag buttons clear by using secondary color from Material UI.
 - One the upload image page, made the submit button only appear after an image is selected for upload.
 - Made small visual changes
 
-### 10 OCT 2024
+### 01 OCT 2024
 Updated the look of the app by implementing Material UI so it looks more professional.
 - Implemented Material UI React Libary (https://mui.com/)
 - Added React-Helmet library and set up the responsive meta tag
@@ -25,9 +25,6 @@ Updated the look of the app by implementing Material UI so it looks more profess
 - Added a button to delete the image which appears when you hover over an image
 - fixed the image size when an image is enlarged so that it doesnt exceed the view
 
-
-## Architecture Diagram
-![diagram](README-images/diagram.png)
 
 ## Introduction
 I developed solid programming skills through a bootcamp, although what excites me most is the problem-solving process—breaking down complex issues into manageable steps and approaching them methodically. I leverage tools like AI, code repositories, and platforms like Stack Overflow to support the programming process.
@@ -46,6 +43,8 @@ This project was my first time ever using:
 - S3 (outside of labs)
 - Lambda (outside of labs)
 
+## Architecture Diagram
+![diagram](README-images/diagram.png)
 
 ## Technologies Used
 
