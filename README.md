@@ -7,8 +7,16 @@ Use the app here: https://main.d136ak8vn4abcb.amplifyapp.com/
 
 ## Changelog
 
+### 09 OCT 2024
+- Merged the 3 different components onto a single page/component. Removed nav buttons as they are no longer necessary. Trying to get the gallery to refresh when image is uploaded but not having success. WIP.
+- Change the image gallery grid to use Material UI grid. this has caused the confirm delete button to appear inside of the thumbnail. Needs fixing. 
+- Changed lambda function code so that only labels with a confidence of 90% or higher are returned.
+- When hover an image and clicking the icon to delete an image, the confirm delete button would remain even. Now if you click off or perform another action it will disappear.
+- Changed lambda function code so that only labels with a confidence score of 90% or higher are returned.
+
+
 ### 02 OCT 2024
-- Changed displayed photos filtering logic from AND to OR. - Previously images only displayed if they were relevant to ALL selected tags. Now all images will display as long as 1 relevant tag is selected.
+- Changed displayed photos filtering logic from AND to OR. - Previously images only displayed if they were relevant to ALL selected tags. Now images will display as long as 1 relevant tag is selected.
 - Made the selected tag buttons clear by using secondary color from Material UI.
 - One the upload image page, made the submit button only appear after an image is selected for upload.
 - Made small visual changes

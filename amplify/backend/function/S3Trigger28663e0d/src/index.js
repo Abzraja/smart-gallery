@@ -6,51 +6,63 @@ const rekognitionClient = new RekognitionClient({ region: 'us-east-1' });
 const dynamodbClient = new DynamoDBClient({ region: 'us-east-1' });
 const s3Client = new S3Client({ region: 'us-east-1' });
 
+const getObjectFromS3 = async (bucket, key) => {
+    try {
+        await waitUntilObjectExists({ client: s3Client, maxWaitTime: 20 }, { Bucket: bucket, Key: key });
+        return await s3Client.send(new GetObjectCommand({ Bucket: bucket, Key: key }));
+    } catch (error) {
+        throw new Error(`Error accessing S3 object: ${error.message}`);
+    }
+};
+
+const detectLabelsInImage = async (bucket, key, minConfidence = 90) => {
+    const params = {
+        Image: {
+            S3Object: { Bucket: bucket, Name: key }
+        },
+        MaxLabels: 10
+    };
+    const rekognitionResponse = await rekognitionClient.send(new DetectLabelsCommand(params));
+    
+    // Filter labels based on confidence score
+    const highConfidenceLabels = rekognitionResponse.Labels
+        .filter(label => label.Confidence >= minConfidence)
+        .map(label => label.Name); // Extract only the label names
+    
+    return highConfidenceLabels;
+};
+
+const storeLabelsInDynamoDB = async (key, labels) => {
+    const dynamoParams = {
+        TableName: 'PhotoTag-mwp6i6x5mbhjfkzpda6tazz55q-dev',
+        Item: {
+            PhotoID: { S: key },
+            Tags: { SS: labels }
+        }
+    };
+    return await dynamodbClient.send(new PutItemCommand(dynamoParams));
+};
+
 exports.handler = async function (event) {
     console.log('Received S3 event:', JSON.stringify(event, null, 2));
     const bucket = event.Records[0].s3.bucket.name;
     let key = event.Records[0].s3.object.key;
-    key = decodeURIComponent(key.replace(/\+/g, ' ')); // Decode the key
-    console.log(`Bucket: ${bucket}`, `Key: ${key}`);
+    key = decodeURIComponent(key.replace(/\+/g, ' '));
 
-    // Wait until the object exists
     try {
-        await waitUntilObjectExists({ client: s3Client, maxWaitTime: 20 }, { Bucket: bucket, Key: key });
-        const s3Response = await s3Client.send(new GetObjectCommand({ Bucket: bucket, Key: key }));
+        const s3Response = await getObjectFromS3(bucket, key);
         console.log('S3 object metadata:', s3Response);
+
+        const highConfidenceLabels = await detectLabelsInImage(bucket, key, 90); // Only labels with confidence >= 90%
+        console.log('High-confidence labels:', highConfidenceLabels);
+
+        if (highConfidenceLabels.length > 0) {
+            await storeLabelsInDynamoDB(key, highConfidenceLabels);
+            console.log('Labels stored successfully');
+        } else {
+            console.log('No high-confidence labels detected.');
+        }
     } catch (error) {
-        console.error('Error accessing S3 object:', error);
-        return;
-    }
-
-    // Call Rekognition to detect labels in the image
-    const params = {
-        Image: {
-            S3Object: {
-                Bucket: bucket,
-                Name: key
-            }
-        },
-        MaxLabels: 10
-    };
-
-    try {
-        const rekognitionResponse = await rekognitionClient.send(new DetectLabelsCommand(params));
-        const labels = rekognitionResponse.Labels.map(label => label.Name);
-        console.log('Detected labels:', labels);
-
-        // Store labels in DynamoDB
-        const dynamoParams = {
-            TableName: 'PhotoTag-mwp6i6x5mbhjfkzpda6tazz55q-dev', //enter dynamodb table name from aws console here
-            Item: {
-                PhotoID: { S: key },
-                Tags: { SS: labels }
-            }
-        };
-
-        await dynamodbClient.send(new PutItemCommand(dynamoParams));
-        console.log('Labels stored successfully');
-    } catch (error) {
-        console.error('Error detecting labels or storing in DynamoDB:', error);
+        console.error(`Error processing image ${key}:`, error.message);
     }
 };

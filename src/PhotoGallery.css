@@ -1,104 +1,102 @@
 .tag-filter {
-    margin-bottom: 20px;
-  }
-  
-  /* .tag-button {
-    margin: 5px;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .tag-button.selected {
-    background-color: #007bff;
-    color: white;
-  } */
-  
-  .photos {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .photo-item {
-    cursor: pointer;
-    position: relative;
-    display: inline-block;
-    margin: 10px;
-  }
+  margin-bottom: 20px;
+}
 
-  .photo-item img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  .delete-icon {
-    position: absolute !important;
-    top: -8px;
-    right: 2px;
-    z-index: 10; /* Ensure it appears above the image */
-    color: rgb(255, 255, 255);
-    background-color: rgba(128, 127, 127, 0.7) !important;
-    border-radius: 5%;
-    display: none !important;
-    width: 32px; /* Control the width to make it more square */
-    height: 32px; /* Control the height to match the width */
-  }
+.photos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Align items to the start without extra spacing */
+}
 
-  .delete-icon .MuiSvgIcon-root {
-    color: rgb(255, 255, 255) !important; /* Change the color of the delete icon */
-    font-size: 20px !important; /* Adjust the icon size if needed */
-  }
+.photo-item {
+  cursor: pointer;
+  position: relative;
+  margin: 10px; /* Space between items */
+  width: 150px; /* Fixed width for uniformity */
+  height: 150px; /* Fixed height for square containers */
+  overflow: hidden; /* Hide overflow */
+  border-radius: 8px; /* Rounded corners */
+  display: flex; /* Added to ensure proper alignment */
+  flex-direction: column; /* Align children vertically */
+}
 
-  .photo-item:hover .delete-icon {
-    display: block !important;
-  }
+.photo-wrapper {
+  flex: 1; /* Allow it to grow and fill the space */
+  position: relative; /* Necessary for positioning child elements */
+}
 
-  .photo-item button {
-    display: block;
-    margin-top: 10px;
-    width: auto;
-    max-width: 200px;
-  }
+.confirm-delete-button {
+  margin-top: 10px; /* Ensure spacing above the button */
+  width: 100%; /* Full width to fill the space */
+}
 
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000; /* Ensure it stays on top */
-  }
-  
-  .modal-content {
-    position: relative; /* Make modal content the reference for absolute positioning */
-    background-color: #fff;
-    padding: 0px;
-    border-radius: 10px;
-    max-width: 90%; /* Make sure modal content doesn't exceed viewport width */
-    max-height: 90%; /* Make sure modal content doesn't exceed viewport height */
-    overflow: hidden; /* Hide any overflowing content */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.photo-thumbnail {
+  width: 100%; /* Fill the container width */
+  height: 100%; /* Fill the container height */
+  object-fit: cover; /* Maintain aspect ratio and fill the square */
+  display: block; /* Ensures the image behaves correctly */
+  min-height: 100%; /* Ensure it covers the height */
+}
 
-  .modal-content img {
-    max-width: 100%; /* Ensure image scales down to fit modal */
-    max-height: 100%; /* Ensure image scales down to fit modal */
-    width: auto; /* Maintain aspect ratio */
-    height: auto; /* Maintain aspect ratio */
-  }
-  
-  .close {
-    position: absolute;
-    color:#0c0c0c, 0.9;
-    top: -10px;
-    right: 8px;
-    font-size: 40px;
-    cursor: pointer;
-  }
+.delete-icon {
+  position: absolute !important;
+  top: -8px;
+  right: 2px;
+  z-index: 10; /* Ensure it appears above the image */
+  color: rgb(255, 255, 255);
+  background-color: rgba(128, 127, 127, 0.7) !important;
+  border-radius: 5%;
+  display: none !important;
+  width: 32px; /* Control the width to make it more square */
+  height: 32px; /* Control the height to match the width */
+}
+
+.delete-icon .MuiSvgIcon-root {
+  color: rgb(255, 255, 255) !important; /* Change the color of the delete icon */
+  font-size: 20px !important; /* Adjust the icon size if needed */
+}
+
+.photo-item:hover .delete-icon {
+  display: block !important;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  z-index: 1000; /* Ensure it stays on top */
+}
+
+.modal-content {
+  position: relative; /* Reference for absolute positioning */
+  background-color: #fff;
+  border-radius: 10px;
+  max-width: 90vw; /* Limit max width */
+  max-height: 90vh; /* Limit max height */
+  overflow: hidden; /* Hide overflowing content */
+  display: flex;
+  justify-content: center; /* Center content */
+  align-items: center; /* Center content */
+  margin: auto; /* Ensures centering in flex */
+}
+
+.modal-content img {
+  max-width: 100%; /* Ensure image fits within modal */
+  max-height: 100%; /* Ensure image fits within modal */
+  object-fit: contain; /* Maintain aspect ratio */
+}
+
+.close {
+  position: absolute;
+  color: #0c0c0c;
+  top: 10px; /* Adjust to your liking */
+  right: 10px; /* Adjust to your liking */
+  font-size: 30px;
+  cursor: pointer;
+}

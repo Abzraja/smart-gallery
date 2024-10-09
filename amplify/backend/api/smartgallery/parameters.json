@@ -1,5 +1,6 @@
 {
   "AppSyncApiName": "smartgallery",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2024-10-09T18:55:00.466Z"
 }

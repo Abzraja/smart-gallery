@@ -18,7 +18,7 @@
       "function": {
         "S3Trigger28663e0d": {
           "deploymentBucketName": "amplify-smartgallery-dev-05d65-deployment",
-          "s3Key": "amplify-builds/S3Trigger28663e0d-58715a6d58486f4d3746-build.zip"
+          "s3Key": "amplify-builds/S3Trigger28663e0d-536336533551642b4375-build.zip"
         }
       },
       "storage": {
