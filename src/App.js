@@ -1,62 +1,85 @@
 import React, { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid2'; // Correct Grid2 import
+import Grid from '@mui/material/Grid2';
 import Button from '@mui/material/Button';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import UploadPhoto from './UploadPhoto';
 import PhotoGallery from './PhotoGallery';
+import { list, getUrl } from '@aws-amplify/storage'; // Updated import
+import { fetchAuthSession } from '@aws-amplify/auth';
 
 const App = ({ signOut, user }) => {
-  const [view, setView] = useState('gallery');
   const [photos, setPhotos] = useState([]);
+  const [view, setView] = useState('gallery'); // New state to manage which component to show
 
-  const handleUploadSuccess = () => {
-    // Trigger a refresh in the PhotoGallery after a successful upload
-    if (photoGalleryRef.current) {
-      photoGalleryRef.current.fetchPhotos();
+  const fetchUpdatedGallery = async () => {
+    try {
+      const { identityId } = await fetchAuthSession();
+      const result = await list(`private/${identityId}/`, { level: 'private' });
+
+      if (result && result.length > 0) {
+        const photoUrls = await Promise.all(
+          result
+            .filter(photo => photo.size > 0)
+            .map(async (photo) => {
+              const signedUrl = await getUrl(photo.key, { level: 'private' });
+              return { path: photo.key, url: signedUrl };
+            })
+        );
+
+        setPhotos(photoUrls);
+      }
+    } catch (error) {
+      console.error("Error fetching gallery:", error);
     }
   };
 
-  const photoGalleryRef = React.useRef();
+  const handleUploadSuccess = (newPhoto) => {
+    setPhotos((prevPhotos) => [...prevPhotos, newPhoto]);
+  };
 
   return (
-    <Box sx={{ m: '10px', p: '0px' }}>
-      {/* Header with Sign Out */}
+    <Box sx={{ m:3, p: '0px' }}>
       <Button variant="contained" onClick={signOut} style={{ float: 'right' }}>
         Sign out
       </Button>
 
-      {/* Greeting */}
-      <Typography variant="h1" sx={{ fontSize: { xs: '1rem', sm: '1.5rem', md: '2rem' }, mb: 5 }}>
-        Hello, {user.signInDetails.loginId}
-      </Typography>
+      {/* Buttons to toggle between gallery and upload photo */}
+      <Box sx={{ mb: 2 }}>
+        <Button variant="contained" onClick={() => setView('gallery')} sx={{ mr: 2 }}>
+          View Gallery
+        </Button>
+        <Button variant="contained" onClick={() => setView('upload')}>
+          Upload Photo
+        </Button>
+      </Box>
 
-      {/* Conditional rendering based on 'view' */}
-      {view === 'gallery' && (
-        <Grid container spacing={2} direction="column">
-          {/* Upload Photo section */}
-          <Grid xs={12} sm={12}>
-            <Box sx={{ p: 2, border: '1px solid #ddd', borderRadius: 1, mb: 1 }}>
-              <Typography variant="h6" gutterBottom>
-                Upload New Photo
-              </Typography>
+      <Box>  
+        <Typography variant="h1" sx={{ fontSize: { xs: '1.5rem', sm: '1.5rem', md: '2rem' }, mt: 5, mb:4 }}>
+            Hello, {user.signInDetails.loginId}
+        </Typography>
+      </Box>
+
+      <Grid container spacing={2} direction="column">
+        {/* Conditionally render components based on selected view */}
+        {view === 'gallery' && (
+          <Grid xs={12}>
+            <Box sx={{ p: 0 }}>
+              <PhotoGallery onGalleryUpdate={fetchUpdatedGallery} photos={photos} />
+            </Box>
+          </Grid>
+        )}
+
+        {view === 'upload' && (
+          <Grid xs={12}>
+            <Box sx={{ p: 0, border: '0px solid #ddd', borderRadius: 1, mb: 1 }}>
               <UploadPhoto onUploadSuccess={handleUploadSuccess} />
             </Box>
           </Grid>
-
-          {/* Gallery section */}
-          <Grid xs={12} sm={12}>
-            <Box sx={{ p: 2 }}>
-              <Typography variant="h6" gutterBottom>
-                Gallery
-              </Typography>
-              <PhotoGallery ref={photoGalleryRef} />
-            </Box>
-          </Grid>
-        </Grid>
-      )}
+        )}
+      </Grid>
     </Box>
   );
 };

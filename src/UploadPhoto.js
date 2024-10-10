@@ -26,7 +26,7 @@ const UploadPhoto = ({ onUploadSuccess }) => {
       try {
         const { identityId } = await fetchAuthSession(); // Get identityId for the user
         const path = `private/${identityId}/${file.name}`; // Construct the upload path
-
+  
         const result = await uploadData({
           path: path,
           data: file,
@@ -39,25 +39,29 @@ const UploadPhoto = ({ onUploadSuccess }) => {
             },
           },
         }).result;
-        console.log('Upload succeeded:', result);
-
-        // Reset preview and file after successful upload
-        setFile(null);
-        setPreview(null);
-
-        // Trigger the gallery refresh by calling the onUploadSuccess callback
+  
+        // Construct the new photo object
+        const newPhoto = { path, url: result.key }; // Include the S3 key as the URL
+  
+        // Call the onUploadSuccess callback and pass the new photo
         if (onUploadSuccess) {
-          const newPhoto = { path, url: result.key }; // Construct the new photo object
-          onUploadSuccess(newPhoto); // Pass the new photo object to the callback
+          onUploadSuccess(newPhoto);
         }
-
+  
         alert('File uploaded successfully');
       } catch (error) {
         console.error('Error uploading file:', error);
         alert('Error uploading file');
+
+          // Reset preview and file after successful upload
+          setFile(null);
+          setPreview(null);
+
+
       }
     }
   };
+
 
   return (
     <div>
@@ -68,7 +72,6 @@ const UploadPhoto = ({ onUploadSuccess }) => {
         </Button>
       </label>
       <Typography>*only .jpg and .png files accepted</Typography>
-      <Typography>Gallery supposed to refresh after image uploaded but is currently not working. Manual refresh is required after upload.</Typography>
       {preview && (
         <Box
           sx={{

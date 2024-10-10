@@ -97,12 +97,13 @@ function PhotoGallery({ onGalleryUpdate }) {
     setDeleteConfirm(photo);
   };
 
-  const handleDeleteConfirm = async () => {
-    if (deleteConfirm) {
+  const handleDeleteConfirm = async (photo) => {
+    if (photo) {
       try {
-        await remove({ path: deleteConfirm.path });
-        setPhotos(photos.filter(p => p.path !== deleteConfirm.path));
-        setDeleteConfirm(null);
+        await remove({ path: photo.path });
+        setPhotos(photos.filter(p => p.path !== photo.path));
+        setSelectedPhoto(null); // Close modal after deletion
+        console.log('Photo deleted:', photo.path); // Log for debugging
       } catch (error) {
         console.error('Error deleting photo:', error);
       }
@@ -134,74 +135,65 @@ function PhotoGallery({ onGalleryUpdate }) {
     }
   }, [filteredPhotos, onGalleryUpdate]);
 
-  const addPhoto = (newPhoto) => {
-    setPhotos(prevPhotos => [...prevPhotos, newPhoto]);
-    extractUniqueTags([...photos, newPhoto]);
-  };
+  // const addPhoto = (newPhoto) => {
+  //   setPhotos(prevPhotos => [...prevPhotos, newPhoto]);
+  //   extractUniqueTags([...photos, newPhoto]);
+  // };
 
   return (
-    <div className="photo-gallery">
-      <div className="tag-filter">
-        {tags.map(tag => (
-          <Button
-            sx={{ m: 0.5, boxShadow: selectedTags.includes(tag) ? 6 : 1 }}
-            variant="contained"
-            key={tag}
-            color={selectedTags.includes(tag) ? "secondary" : "primary"}
-            onClick={() => handleTagSelection(tag)}
-          >
-            {tag}
-          </Button>
-        ))}
-      </div>
-  
-      <Grid container spacing={2} className="photos">
-        {filteredPhotos.map((photo, index) => (
-          <Grid item xs={6} sm={4} md={3} key={index} className="photo-item">
-            <div className="photo-wrapper" style={{ position: 'relative' }}> {/* Ensure relative positioning for the photo-wrapper */}
-              <img 
-                src={photo.url} 
-                alt="Uploaded" 
-                onClick={() => openPreview(photo)} 
-                className="photo-thumbnail"
-              />
-              <IconButton
-                className="delete-icon"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleDeleteClick(photo);
-                }}
-                aria-label="delete"
-                size="small"
-                sx={{ position: 'absolute', top: 5, right: 5 }} // Position delete icon
-              >
-                <DeleteIcon fontSize="small" />
-              </IconButton>
-            </div>
-            {deleteConfirm && deleteConfirm.path === photo.path && ( 
-              <Button
-                variant="contained"
-                color="primary"
-                className="confirm-delete-button"
-                onClick={handleDeleteConfirm}
-                fullWidth
-                sx={{ mt: 1 }} // Added margin for spacing using MUI system props
-              >
-                Confirm Delete
-              </Button>
-            )}
-          </Grid>
-        ))}
-      </Grid>
-  
-      <PhotoModal
-        open={!!selectedPhoto}
-        handleClose={closePreview}
-        selectedPhoto={selectedPhoto}
-      />
+  <div className="photo-gallery">
+    <div className="tag-filter">
+      {tags.map(tag => (
+        <Button
+          sx={{ m: 0.5, boxShadow: selectedTags.includes(tag) ? 6 : 1 }}
+          variant="contained"
+          key={tag}
+          color={selectedTags.includes(tag) ? "secondary" : "primary"}
+          onClick={() => handleTagSelection(tag)}
+        >
+          {tag}
+        </Button>
+      ))}
     </div>
-  );
-  
+
+    <Grid container spacing={2} className="photos">
+  {filteredPhotos.map((photo, index) => (
+    <Grid
+      item
+      xs={6} sm={4} md={3}
+      key={index}
+      className="photo-item"
+      container
+      direction="column"
+      alignItems="center"
+    > 
+      {/* Use a flexbox layout for vertical alignment */}
+      
+      <div className="photo-wrapper" style={{ position: 'relative', width: '100%' }}> 
+        {/* Ensure relative positioning for the photo-wrapper */}
+        <img 
+          src={photo.url} 
+          alt="Uploaded" 
+          onClick={() => openPreview(photo)} 
+          className="photo-thumbnail"
+          style={{ width: '100%', objectFit: 'cover' }}  // Ensure consistent image size
+        />
+      </div>
+    </Grid>
+  ))}
+</Grid>
+
+
+
+    <PhotoModal
+      open={!!selectedPhoto}
+      handleClose={closePreview}
+      selectedPhoto={selectedPhoto}
+      handleDeleteConfirm={handleDeleteConfirm} // Pass delete function to modal
+    />
+  </div>
+);
+
 }
 
 export default PhotoGallery;

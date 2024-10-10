@@ -7,6 +7,13 @@ Use the app here: https://main.d136ak8vn4abcb.amplifyapp.com/
 
 ## Changelog
 
+### 10 OCT 2024
+- API key had expired - restoring it in Amplify seemed inefficient. working on lambda function to rotate key in secrets manager. Will reference it from secrets mananger instead. WIP.
+- Reverted design to 2 views - Gallery and Upload Photo Sections.
+- Updated the image modal to take up more space
+- Added a delete button on the image modal
+- Updated the thumbnail grid to use material ui grid.
+
 ### 09 OCT 2024
 - Merged the 3 different components onto a single page/component. Removed nav buttons as they are no longer necessary. Trying to get the gallery to refresh when image is uploaded but not having success. WIP.
 - Change the image gallery grid to use Material UI grid. this has caused the confirm delete button to appear inside of the thumbnail. Needs fixing. 

@@ -18,6 +18,13 @@
   border-radius: 8px; /* Rounded corners */
   display: flex; /* Added to ensure proper alignment */
   flex-direction: column; /* Align children vertically */
+  align-items: center;
+}
+
+.photo-thumbnail {
+  width: 100%;
+  object-fit: cover; /* Ensure thumbnails have consistent sizes */
+  cursor: pointer;
 }
 
 .photo-wrapper {

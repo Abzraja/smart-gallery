@@ -19,6 +19,10 @@
         "S3Trigger28663e0d": {
           "deploymentBucketName": "amplify-smartgallery-dev-05d65-deployment",
           "s3Key": "amplify-builds/S3Trigger28663e0d-536336533551642b4375-build.zip"
+        },
+        "rotation": {
+          "deploymentBucketName": "amplify-smartgallery-dev-05d65-deployment",
+          "s3Key": "amplify-builds/rotation-55696b49547648543666-build.zip"
         }
       },
       "storage": {

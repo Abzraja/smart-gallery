@@ -52,6 +52,11 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "rotation": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "parameters": {
@@ -68,6 +73,22 @@
         {
           "category": "function",
           "resourceName": "S3Trigger28663e0d"
+        }
+      ]
+    },
+    "AMPLIFY_function_rotation_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "rotation"
+        }
+      ]
+    },
+    "AMPLIFY_function_rotation_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "rotation"
         }
       ]
     }
