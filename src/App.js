@@ -48,10 +48,10 @@ const App = ({ signOut, user }) => {
 
       {/* Buttons to toggle between gallery and upload photo */}
       <Box sx={{ mb: 2 }}>
-        <Button variant="contained" onClick={() => setView('gallery')} sx={{ mr: 2 }}>
+        <Button variant="contained" onClick={() => setView('gallery')} sx={{ mr: 1, mb:1 }}>
           View Gallery
         </Button>
-        <Button variant="contained" onClick={() => setView('upload')}>
+        <Button variant="contained" onClick={() => setView('upload')} sx={{ mr: 1, mb:1 }}>
           Upload Photo
         </Button>
       </Box>

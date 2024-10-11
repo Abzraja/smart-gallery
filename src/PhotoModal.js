@@ -3,23 +3,26 @@ import { Box, Modal, IconButton, Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 function PhotoModal({ open, handleClose, selectedPhoto, handleDeleteConfirm }) {
-    const [confirmDelete, setConfirmDelete] = useState(false);
-  
-    const handleDeleteButtonClick = () => {
-      setConfirmDelete(true); // Show confirm delete button
-    };
-  
-    const handleConfirmDelete = () => {
-      handleDeleteConfirm(selectedPhoto); // Call the delete function from parent
-      setConfirmDelete(false); // Reset confirmation state
-    };
-  
-  
-  
+  const [confirmDelete, setConfirmDelete] = useState(false);
+
+  const handleDeleteButtonClick = () => {
+    setConfirmDelete(true); // Show confirm delete button
+  };
+
+  const handleConfirmDelete = () => {
+    handleDeleteConfirm(selectedPhoto); // Call the delete function from parent
+    setConfirmDelete(false); // Reset confirmation state
+  };
+
+  const handleModalClose = () => {
+    setConfirmDelete(false); // Reset confirm delete state when modal closes
+    handleClose(); // Call parent handleClose
+  };
+
   return (
     <Modal
       open={open}
-      onClose={handleClose}
+      onClose={handleModalClose} // Use the updated handleClose function
       aria-labelledby="photo-modal-title"
       aria-describedby="photo-modal-description"
       sx={{
@@ -63,7 +66,7 @@ function PhotoModal({ open, handleClose, selectedPhoto, handleDeleteConfirm }) {
           }}
         />
         <span
-          onClick={handleClose}
+          onClick={handleModalClose}
           style={{
             position: 'absolute',
             top: '-10px',
@@ -79,11 +82,19 @@ function PhotoModal({ open, handleClose, selectedPhoto, handleDeleteConfirm }) {
           &times;
         </span>
 
-       {/* Delete icon inside the modal */}
-       <IconButton
+        {/* Delete icon inside the modal */}
+        <IconButton
           onClick={handleDeleteButtonClick}
-          sx={{ position: 'absolute', bottom: 10, right: 10, color: '#FFF', backgroundColor: 'error.main', '&:hover': {
-              backgroundColor: 'error.dark'} }}
+          sx={{
+            position: 'absolute',
+            bottom: 10,
+            right: 10,
+            color: '#FFF',
+            backgroundColor: 'error.main',
+            '&:hover': {
+              backgroundColor: 'error.dark'
+            }
+          }}
         >
           <DeleteIcon />
         </IconButton>
