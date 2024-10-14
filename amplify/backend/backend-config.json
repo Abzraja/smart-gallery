@@ -7,7 +7,7 @@
           "additionalAuthenticationProviders": [],
           "defaultAuthentication": {
             "apiKeyConfig": {
-              "apiKeyExpirationDate": "2024-10-16T19:44:51.758Z",
+              "apiKeyExpirationDate": "2024-10-20T20:45:17.734Z",
               "apiKeyExpirationDays": 7,
               "description": ""
             },
@@ -53,6 +53,11 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "fetchs": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "rotation": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -73,6 +78,22 @@
         {
           "category": "function",
           "resourceName": "S3Trigger28663e0d"
+        }
+      ]
+    },
+    "AMPLIFY_function_fetchs_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fetchs"
+        }
+      ]
+    },
+    "AMPLIFY_function_fetchs_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fetchs"
         }
       ]
     },

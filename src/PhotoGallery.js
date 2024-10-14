@@ -1,19 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { list, getUrl, remove } from '@aws-amplify/storage';
 import { fetchAuthSession } from '@aws-amplify/auth';
 import { generateClient } from 'aws-amplify/api';
 import { listPhotoTags } from './graphql/queries';
-import awsconfig from './aws-exports';
-import { Amplify } from 'aws-amplify';
 import PhotoModal from './PhotoModal';
 import './PhotoGallery.css';
 import Grid from '@mui/material/Grid2'; // Use Grid2 import
 
-// Configure Amplify
-Amplify.configure(awsconfig);
 
 const client = generateClient();
 

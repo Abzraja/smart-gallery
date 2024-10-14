@@ -10,6 +10,7 @@ import PhotoGallery from './PhotoGallery';
 import { list, getUrl } from '@aws-amplify/storage'; // Updated import
 import { fetchAuthSession } from '@aws-amplify/auth';
 
+
 const App = ({ signOut, user }) => {
   const [photos, setPhotos] = useState([]);
   const [view, setView] = useState('gallery'); // New state to manage which component to show

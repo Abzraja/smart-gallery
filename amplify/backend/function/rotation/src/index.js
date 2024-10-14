@@ -4,11 +4,16 @@ const secretsManager = new AWS.SecretsManager();
 
 exports.handler = async (event) => {
     try {
-        // Create a new API key
+        // Calculate the expiration timestamp for 7 days from now
+        const sevenDaysInSeconds = 7 * 24 * 60 * 60; // 7 days in seconds
+        const currentTimeInSeconds = Math.floor(Date.now() / 1000); // current time in seconds since epoch
+        const expirationTimestamp = currentTimeInSeconds + sevenDaysInSeconds;
+
+        // Create a new API key with expiration in 7 days
         const createApiKeyResponse = await appsync.createApiKey({
             apiId: 'mwp6i6x5mbhjfkzpda6tazz55q',
             description: 'API key for AppSync',
-            expires: 604800 // 7 days in seconds
+            expires: expirationTimestamp // Pass the expiration timestamp (seconds since epoch)
         }).promise();
 
         const newApiKey = createApiKeyResponse.apiKey.id;

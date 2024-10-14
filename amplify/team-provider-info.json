@@ -22,7 +22,11 @@
         },
         "rotation": {
           "deploymentBucketName": "amplify-smartgallery-dev-05d65-deployment",
-          "s3Key": "amplify-builds/rotation-55696b49547648543666-build.zip"
+          "s3Key": "amplify-builds/rotation-66706774684d424c7571-build.zip"
+        },
+        "fetchs": {
+          "deploymentBucketName": "amplify-smartgallery-dev-05d65-deployment",
+          "s3Key": "amplify-builds/fetchs-584b6b667544686c4774-build.zip"
         }
       },
       "storage": {
